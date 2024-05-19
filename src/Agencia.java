@@ -8,17 +8,23 @@ public class Agencia {
     public Agencia(int codigoAgencia, String cidade) {
         this.codigoAgencia = codigoAgencia;
         this.cidade = cidade;
-        this.contas = new ArrayList<>();
+        this.contas = new ArrayList<Conta>();
     }
 
-    public void addConta(int numeroConta) {     //levando em consideração que a "conta" vai começar com o saldo zerado
+    public void addConta(int numeroConta, boolean tipoConta,String dataAbertura, double paramExtra,Cliente cliente) {     //levando em consideração que a "conta" vai começar com o saldo zerado
         for (Conta conta : contas) {
             if (conta.getNumeroConta() == numeroConta) {
                 System.out.println("Esse numéro de conta já está presente em uma conta!");
                 return;
             }
         }
-        Conta conta = new Conta(numeroConta);   //validar qual tipo de conta ele vai escolher
+        Conta conta;
+        if(tipoConta) {
+        	conta = new ContaPoupanca(numeroConta,cliente,dataAbertura,paramExtra);
+        }else {
+        	conta = new ContaCorrente(numeroConta,cliente,dataAbertura,paramExtra);
+        }
+		//validar qual tipo de conta ele vai escolher
         this.contas.add(conta);
     }
 
