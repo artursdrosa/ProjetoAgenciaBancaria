@@ -17,6 +17,7 @@ public class ContaCorrente extends Conta{
 	@Override
 	public void removeCliente() {
 		setCliente(null);
+		getCliente().setContaCorrente(null);
 	}
 
 	

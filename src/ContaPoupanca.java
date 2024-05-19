@@ -17,6 +17,7 @@ public class ContaPoupanca extends Conta {
 	@Override
 	public void removeCliente() {
 		setCliente(null);
+		getCliente().setContaPoupanca(null);
 	}
 
 	
