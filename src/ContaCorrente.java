@@ -6,6 +6,7 @@ public class ContaCorrente extends Conta{
 		super(numeroConta,cliente);
 		this.taxaJuro = taxaJuro;
 		this.dataAbertura = dataAbertura;
+		cliente.setContaCorrente(this);
 	}
 
 	@Override
@@ -20,5 +21,11 @@ public class ContaCorrente extends Conta{
 		getCliente().setContaCorrente(null);
 	}
 
+	@Override
+	public String toString() {
+		return "ContaCorrente [taxaJuro=" + taxaJuro + ", dataAbertura=" + dataAbertura + "]";
+	}
+
+	
 	
 }

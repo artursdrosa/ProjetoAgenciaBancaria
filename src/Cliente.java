@@ -1,11 +1,11 @@
-public abstract class Cliente implements Comparable<Cliente>{
+public class Cliente implements Comparable<Cliente>{
     private int id;
     private String nome;
-    private int telefone;
+    private String telefone;
     private ContaCorrente contaCorrente;
     private ContaPoupanca contaPoupanca;
     
-	public Cliente(int id, String nome, int telefone, ContaCorrente contaCorrente, ContaPoupanca contaPoupanca) {
+	public Cliente(int id, String nome, String telefone, ContaCorrente contaCorrente, ContaPoupanca contaPoupanca) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -13,11 +13,25 @@ public abstract class Cliente implements Comparable<Cliente>{
 		this.contaPoupanca = contaPoupanca;
 	}
 	
+	public Cliente(int id, String nome, String telefone) {
+		this.id = id;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.contaCorrente = null;	
+		this.contaPoupanca = null;
+	}
+	
 	@Override
     public int compareTo(Cliente outroCliente) {
         return this.nome.compareTo(outroCliente.getNome()); 
     }
 	
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", telefone=" + telefone + ", contaCorrente=" + contaCorrente
+				+ ", contaPoupanca=" + contaPoupanca + "]";
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -34,11 +48,11 @@ public abstract class Cliente implements Comparable<Cliente>{
 		this.nome = nome;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 

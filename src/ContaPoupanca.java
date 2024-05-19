@@ -8,6 +8,7 @@ public class ContaPoupanca extends Conta {
         super(numeroConta,cliente);
         this.dataAbertura = dataAbertura;
         this.minimoSaldo = minimoSaldo;
+        cliente.setContaPoupanca(this);
     }
 
 	@Override
@@ -20,6 +21,11 @@ public class ContaPoupanca extends Conta {
 	public void removeCliente() {
 		setCliente(null);
 		getCliente().setContaPoupanca(null);
+	}
+
+	@Override
+	public String toString() {
+		return "ContaPoupanca [minimoSaldo=" + minimoSaldo + ", dataAbertura=" + dataAbertura + "]";
 	}
 
 	
