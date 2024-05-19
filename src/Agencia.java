@@ -24,7 +24,6 @@ public class Agencia {
         }else {
         	conta = new ContaCorrente(numeroConta,cliente,dataAbertura,paramExtra);
         }
-		//validar qual tipo de conta ele vai escolher
         this.contas.add(conta);
     }
 
