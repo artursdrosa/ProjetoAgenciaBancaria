@@ -1,11 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ContaCorrente extends Conta{
     private double taxaJuro;
     private String dataAbertura;
     
-	public ContaCorrente(int numeroConta,Cliente cliente, String dataAbertura, double taxaJuro) {
+	public ContaCorrente(int numeroConta,Cliente cliente, double taxaJuro) {
 		super(numeroConta,cliente);
 		this.taxaJuro = taxaJuro;
-		this.dataAbertura = dataAbertura;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		this.dataAbertura = LocalDateTime.now().format(formatter);
 		cliente.setContaCorrente(this);
 	}
 
@@ -23,9 +27,6 @@ public class ContaCorrente extends Conta{
 
 	@Override
 	public String toString() {
-		return "ContaCorrente [taxaJuro=" + taxaJuro + ", dataAbertura=" + dataAbertura + "]";
+		return "ContaCorrente [taxaJuro=" + taxaJuro + ", dataAbertura=" + dataAbertura + ", numeroConta=" + super.getNumeroConta() + "]";
 	}
-
-	
-	
 }

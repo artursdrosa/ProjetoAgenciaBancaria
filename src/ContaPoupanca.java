@@ -1,12 +1,14 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ContaPoupanca extends Conta {
     private double minimoSaldo;
     private String dataAbertura;
 
-    public ContaPoupanca(int numeroConta,Cliente cliente,String dataAbertura, double minimoSaldo) {
+    public ContaPoupanca(int numeroConta,Cliente cliente, double minimoSaldo) {
         super(numeroConta,cliente);
-        this.dataAbertura = dataAbertura;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		this.dataAbertura = LocalDateTime.now().format(formatter);
         this.minimoSaldo = minimoSaldo;
         cliente.setContaPoupanca(this);
     }
@@ -25,7 +27,7 @@ public class ContaPoupanca extends Conta {
 
 	@Override
 	public String toString() {
-		return "ContaPoupanca [minimoSaldo=" + minimoSaldo + ", dataAbertura=" + dataAbertura + "]";
+		return "ContaPoupanca [minimoSaldo=" + minimoSaldo + ", dataAbertura=" + dataAbertura + ", numeroConta=" + super.getNumeroConta() + "]";
 	}
 
 	

@@ -1,6 +1,6 @@
 public abstract class Conta implements Comparable<Conta> {
     private int numeroConta;
-    private int saldo;
+    private float saldo;
     private Cliente cliente;
 
     public Conta(int numeroConta,Cliente cliente) {
@@ -13,7 +13,7 @@ public abstract class Conta implements Comparable<Conta> {
         return numeroConta;
     }
 
-    public int getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
     
@@ -25,7 +25,7 @@ public abstract class Conta implements Comparable<Conta> {
 		this.cliente = cliente;
 	}
 
-	public void debitar(int valor) {
+	public void debitar(float valor) {
         if (valor > 0) {
             this.saldo -= valor;
         }else{
@@ -33,7 +33,7 @@ public abstract class Conta implements Comparable<Conta> {
         }
     }
 
-    public void creditar(int valor) {
+    public void creditar(float valor) {
         if (valor > 0) {
             this.saldo += valor;
         }else{

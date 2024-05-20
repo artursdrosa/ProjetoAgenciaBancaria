@@ -11,18 +11,20 @@ public class Agencia {
         this.contas = new ArrayList<Conta>();
     }
 
-    public void addConta(int numeroConta, boolean tipoConta,String dataAbertura, double paramExtra,Cliente cliente) {     //levando em consideração que a "conta" vai começar com o saldo zerado
-        for (Conta conta : contas) {
-            if (conta.getNumeroConta() == numeroConta) {
-                System.out.println("Esse numéro de conta já está presente em uma conta!");
-                return;
-            }
-        }
-        Conta conta;
+    public void addConta(int numeroConta, boolean tipoConta,double paramExtra,Cliente cliente) {     //levando em consideração que a "conta" vai começar com o saldo zerado
+        Conta conta = null;
         if(tipoConta) {
-        	conta = new ContaPoupanca(numeroConta,cliente,dataAbertura,paramExtra);
+            if(cliente.getContaPoupanca() == null) {
+                conta = new ContaPoupanca(numeroConta, cliente, paramExtra);
+            }else{
+                System.out.println("Esse cliente já tem uma conta poupança!");
+            }
         }else {
-        	conta = new ContaCorrente(numeroConta,cliente,dataAbertura,paramExtra);
+            if(cliente.getContaCorrente() == null) {
+                conta = new ContaCorrente(numeroConta, cliente, paramExtra);
+            }else{
+                System.out.println("Esse cliente já tem uma conta corrente!");
+            }
         }
         this.contas.add(conta);
     }
@@ -31,6 +33,11 @@ public class Agencia {
         for (Conta conta : this.contas) {
             if(conta.getNumeroConta() == numeroConta) {
                 this.contas.remove(conta);
+                if(conta.getClass() == ContaPoupanca.class) {
+                    conta.getCliente().setContaPoupanca(null);
+                }else{
+                    conta.getCliente().setContaCorrente(null);
+                }
             }
         }
     }
@@ -43,5 +50,9 @@ public class Agencia {
         }
         System.out.println("Não achamos uma conta com esse numero de conta!");
         return null;
+    }
+
+    public ArrayList<Conta> getContas() {
+        return contas;
     }
 }
