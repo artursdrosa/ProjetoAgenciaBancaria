@@ -5,14 +5,6 @@ public class Cliente implements Comparable<Cliente>{
     private ContaCorrente contaCorrente;
     private ContaPoupanca contaPoupanca;
     
-	public Cliente(int id, String nome, String telefone, ContaCorrente contaCorrente, ContaPoupanca contaPoupanca) {
-		this.id = id;
-		this.nome = nome;
-		this.telefone = telefone;
-		this.contaCorrente = contaCorrente;	
-		this.contaPoupanca = contaPoupanca;
-	}
-	
 	public Cliente(int id, String nome, String telefone) {
 		this.id = id;
 		this.nome = nome;

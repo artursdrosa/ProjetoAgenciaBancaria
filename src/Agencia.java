@@ -11,36 +11,42 @@ public class Agencia {
         this.contas = new ArrayList<Conta>();
     }
 
-    public void addConta(int numeroConta, boolean tipoConta,double paramExtra,Cliente cliente) {     //levando em consideração que a "conta" vai começar com o saldo zerado
+    public boolean addConta(int numeroConta, boolean tipoConta,double paramExtra,Cliente cliente) {     //levando em consideração que a "conta" vai começar com o saldo zerado
         Conta conta = null;
         if(tipoConta) {
             if(cliente.getContaPoupanca() == null) {
                 conta = new ContaPoupanca(numeroConta, cliente, paramExtra);
             }else{
                 System.out.println("Esse cliente já tem uma conta poupança!");
+                return false;
             }
         }else {
             if(cliente.getContaCorrente() == null) {
                 conta = new ContaCorrente(numeroConta, cliente, paramExtra);
             }else{
                 System.out.println("Esse cliente já tem uma conta corrente!");
+                return false;
             }
         }
         this.contas.add(conta);
+        return true;
     }
 
-    public void removeConta(int numeroConta) {      //numeroConta deve ser único, pois será identificador
-        for (Conta conta : this.contas) {
-            if(conta.getNumeroConta() == numeroConta) {
-                this.contas.remove(conta);
-                if(conta.getClass() == ContaPoupanca.class) {
+    public void removeConta(int numeroConta) {
+        for (int i = 0; i < this.contas.size(); i++) {
+            Conta conta = this.contas.get(i);
+            if (conta.getNumeroConta() == numeroConta) {
+                this.contas.remove(i);
+                if (conta instanceof ContaPoupanca) {
                     conta.getCliente().setContaPoupanca(null);
-                }else{
+                } else {
                     conta.getCliente().setContaCorrente(null);
                 }
+                break; // Parar o loop após encontrar e remover a conta
             }
         }
     }
+
 
     public Conta getConta(int numeroConta) {
         for (Conta conta : this.contas) {

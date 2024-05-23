@@ -27,6 +27,6 @@ public class ContaCorrente extends Conta{
 
 	@Override
 	public String toString() {
-		return "ContaCorrente [taxaJuro=" + taxaJuro + ", dataAbertura=" + dataAbertura + ", numeroConta=" + super.getNumeroConta() + "]";
+		return "ContaCorrente [taxaJuro= " + taxaJuro + ", dataAbertura= " + dataAbertura + ", numeroConta= " + super.getNumeroConta() + "]";
 	}
 }

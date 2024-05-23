@@ -27,7 +27,7 @@ public class ContaPoupanca extends Conta {
 
 	@Override
 	public String toString() {
-		return "ContaPoupanca [minimoSaldo=" + minimoSaldo + ", dataAbertura=" + dataAbertura + ", numeroConta=" + super.getNumeroConta() + "]";
+		return "ContaPoupanca [minimoSaldo= " + minimoSaldo + ", dataAbertura= " + dataAbertura + ", numeroConta= " + super.getNumeroConta() + "]";
 	}
 
 	

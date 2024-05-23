@@ -56,9 +56,10 @@ public class Main {
 								try {
 									System.out.println("Informe o mínimo do saldo: ");
 									paramExtra = Double.parseDouble(sc.nextLine());
-									agencia1.addConta(numeroConta, tipoConta.equals("P"), paramExtra, cliente);
-									System.out.println("Número de conta: " + numeroConta);
-									numeroConta++;
+									if (agencia1.addConta(numeroConta, true, paramExtra, cliente)) {
+										System.out.println("Número de conta: " + numeroConta);
+										numeroConta++;
+									}
 								} catch (Exception e) {
 									System.out.println("Entrada inválida. Por favor, informe um número válido para o saldo mínimo.");
 								}
@@ -66,9 +67,10 @@ public class Main {
 								try {
 									System.out.println("Informe a taxa de juro: ");
 									paramExtra = Double.parseDouble(sc.nextLine());
-									agencia1.addConta(numeroConta, tipoConta.equals("P"), paramExtra, cliente);
-									System.out.println("Número de conta: " + numeroConta);
-									numeroConta++;
+									if (agencia1.addConta(numeroConta, false, paramExtra, cliente)) {
+										System.out.println("Número de conta: " + numeroConta);
+										numeroConta++;
+									}
 								} catch (Exception e) {
 									System.out.println("Entrada inválida. Por favor, informe um número válido para a taxa de juro.");
 								}
@@ -172,7 +174,41 @@ public class Main {
 					for (Cliente cliente : clientes) {
 						System.out.println(cliente);
 					}
-				} else if (opt.equals("0")) {
+				}else if(opt.equals("10")) {
+					int clienteId = 0;
+					boolean achouCliente = false;
+					Conta cc = null,cp = null;
+					try {
+						System.out.println("Informe o ID do cliente: ");
+						clienteId = Integer.parseInt(sc.nextLine());
+					}catch(Exception e) {
+						System.out.println("Informe um numero inteiro como ID!");
+					}
+						for (Cliente c : clientes) {
+							System.out.println("entrou no loop de clientes");
+							if (c.getId() == clienteId) {
+								clientes.remove(c);
+								cc = c.getContaCorrente();
+								cp= c.getContaPoupanca();
+								System.out.println("achou o cliente");
+								achouCliente = true;
+								break;
+							}
+						}
+						if(cc != null) {
+							System.out.println("removendo conta corrente");
+							agencia1.removeConta(cc.getNumeroConta());
+						}else if(cp != null) {
+							System.out.println("removendo conta poupanca");
+							agencia1.removeConta(cp.getNumeroConta());
+						}
+						if(!achouCliente) {
+							System.out.println("Esse cliente não foi encontrado");
+						}else {
+							System.out.println("Cliente removido junto com suas contas");
+						}
+					
+				}else if (opt.equals("0")) {
 					System.out.println("Programa encerrado!");
 					break;
 				}
@@ -192,6 +228,7 @@ public class Main {
 				+ "7 - Remover conta \n"
 				+ "8 - Gerar relatório de contas \n"
 				+ "9 - Gerar relatório de clientes \n"
+				+ "10 - Remover Cliente \n"
 				+ "0 - Encerrar programa \n"
 				+ ">> ");
 	}
@@ -199,10 +236,10 @@ public class Main {
 	public static boolean validaOpt(String opt) {
 		try {
 			int option = Integer.parseInt(opt); // tentando coverter string para inteiro, se falhar é porque a entrada é inválida
-			if (option >= 0 && option <= 9) {
+			if (option >= 0 && option <= 10) {
 				return true;
 			} else {
-				System.out.println("Opção inválida. Por favor, escolha um número entre 0 e 9.");
+				System.out.println("Opção inválida. Por favor, escolha um número entre 0 e 10.");
 				return false;
 			}
 		} catch (NumberFormatException e) {
